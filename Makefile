@@ -34,7 +34,7 @@ else
 	endif
 endif
 
-TOOLS_SHELL="./hack/tools.sh"
+TOOLS_SHELL="./scripts/tools.sh"
 # golangci-lint
 LINTER := bin/golangci-lint
 
