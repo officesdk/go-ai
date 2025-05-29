@@ -5,12 +5,12 @@ import (
 )
 
 type Config struct {
-	Name       string
-	ApiKey     string
-	ApiHost    string
-	ApiTimeout time.Duration
-	Debug      bool
-	Enabled    bool
+	Name       string        `json:"name"`
+	ApiKey     string        `json:"apiKey"`
+	ApiHost    string        `json:"apiHost"`
+	ApiTimeout time.Duration `json:"apiTimeout"`
+	Debug      bool          `json:"debug"`
+	Enabled    bool          `json:"enabled"`
 }
 
 type ConfigType string

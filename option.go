@@ -12,3 +12,15 @@ func WithConfig(options ...config.Config) Option {
 		c.config = append(c.config, options...)
 	}
 }
+
+func WithRawConfig(rawConfig []byte) Option {
+	return func(c *Client) {
+		c.rawConfig = rawConfig
+	}
+}
+
+func WithRawConfigType(rawConfigType config.ConfigType) Option {
+	return func(c *Client) {
+		c.rawConfigType = rawConfigType
+	}
+}

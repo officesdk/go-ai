@@ -5,8 +5,11 @@ import (
 	"fmt"
 
 	"github.com/BurntSushi/toml"
+	"github.com/mitchellh/mapstructure"
 	"github.com/officesdk/go-ai/config"
 	"github.com/officesdk/go-ai/manager"
+	_ "github.com/officesdk/go-ai/service/notfoundai" // Import the not found AI service
+	_ "github.com/officesdk/go-ai/service/openai"     // Import the not found AI service
 	"gopkg.in/yaml.v3"
 )
 
@@ -24,30 +27,51 @@ func NewClient(options ...Option) (*Client, error) {
 		option(c)
 	}
 	if len(c.rawConfig) != 0 {
-		var configArr []config.Config
+		configArr := make([]config.Config, 0)
+		tagName := "json"
+		storeMap := make([]any, 0)
 		switch c.rawConfigType {
 		case config.ConfigTypeJson:
-			// Parse JSON configuration
-
-			err := json.Unmarshal(c.rawConfig, &configArr)
+			// JSON configuration
+			err := json.Unmarshal(c.rawConfig, &storeMap)
 			if err != nil {
-				return nil, fmt.Errorf("failed to parse JSON config: %w", err)
+				return nil, fmt.Errorf("failed to json unmarshal raw config: %w", err)
 			}
 		case config.ConfigTypeYaml:
-			// Parse YAML configuration
-			err := yaml.Unmarshal(c.rawConfig, &configArr)
+			// YAML configuration
+			tagName = "yaml"
+			err := yaml.Unmarshal(c.rawConfig, &storeMap)
 			if err != nil {
-				return nil, fmt.Errorf("failed to parse YAML config: %w", err)
+				return nil, fmt.Errorf("failed to yaml unmarshal raw config: %w", err)
 			}
 		case config.ConfigTypeToml:
-			// Parse TOML configuration
-			err := toml.Unmarshal(c.rawConfig, &configArr)
+			// TOML configuration
+			tagName = "toml"
+			err := toml.Unmarshal(c.rawConfig, &storeMap)
 			if err != nil {
-				return nil, fmt.Errorf("failed to parse TOML config: %w", err)
+				return nil, fmt.Errorf("failed to toml unmarshal raw config: %w", err)
 			}
 		default:
 			return nil, fmt.Errorf("unsupported config type: %s", c.rawConfigType)
 		}
+
+		decoderConfig := mapstructure.DecoderConfig{
+			DecodeHook:       mapstructure.StringToTimeDurationHookFunc(),
+			Result:           &configArr,
+			TagName:          tagName,
+			WeaklyTypedInput: false,
+			Squash:           false,
+		}
+		decoder, err := mapstructure.NewDecoder(&decoderConfig)
+		if err != nil {
+			return nil, err
+		}
+
+		err = decoder.Decode(storeMap)
+		if err != nil {
+			return nil, err
+		}
+
 		configMap := make(map[string]config.Config)
 		for _, cfg := range c.config {
 			configMap[cfg.Name] = cfg
