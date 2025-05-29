@@ -15,11 +15,6 @@ type NotFoundAIService struct {
 	config config.Config
 }
 
-func (o NotFoundAIService) ChatCompletionStream(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error) {
-	//TODO implement me
-	panic("implement me")
-}
-
 var Service = &NotFoundAIService{}
 
 var _ manager.AIService = (*NotFoundAIService)(nil)
@@ -39,4 +34,8 @@ func (o NotFoundAIService) Name() string {
 
 func (o NotFoundAIService) ChatCompletion(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error) {
 	return aimodel.ChatCompletionResponse{}, fmt.Errorf("not found ai")
+}
+
+func (o NotFoundAIService) ChatCompletionStream(ctx context.Context, request aimodel.ChatCompletionRequest) (response *aimodel.ChatCompletionStream, err error) {
+	return &aimodel.ChatCompletionStream{}, fmt.Errorf("not found ai")
 }
