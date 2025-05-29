@@ -1,6 +1,19 @@
-# go-ai
-go ai sdk
-
+# Go-AI
+<p align="center">
+  <a href="https://github.com/officesdk/go-ai/releases"><img src="https://img.shields.io/github/v/release/officesdk/go-ai?style=flat" alt="Release"></a>
+  <a href="https://github.com/officesdk/go-ai/stargazers"><img src="https://img.shields.io/github/stars/officesdk/go-ai?style=flat" alt="Stars"></a>
+  <a href="https://github.com/officesdk/go-ai/network/members"><img src="https://img.shields.io/github/forks/officesdk/go-ai?style=flat" alt="Forks"></a>
+  <a href="https://github.com/officesdk/go-ai/issues"><img src="https://img.shields.io/github/issues/officesdk/go-ai?color=gold&style=flat" alt="Issues"></a>
+  <a href="https://github.com/officesdk/go-ai/pulls"><img src="https://img.shields.io/github/issues-pr/officesdk/go-ai?color=gold&style=flat" alt="Pull Requests"></a>
+  <a href="https://github.com/officesdk/go-ai/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
+  <a href="https://github.com/officesdk/go-ai/graphs/contributors"><img src="https://img.shields.io/github/contributors/officesdk/go-ai?color=green&style=flat" alt="Contributors"></a>
+  <a href="https://github.com/officesdk/go-ai/commits"><img src="https://img.shields.io/github/last-commit/officesdk/go-ai?color=green&style=flat" alt="Last Commit"></a>
+</p>
+<p align="center">
+  <a href="https://pkg.go.dev/github.com/officesdk/go-ai"><img src="https://img.shields.io/badge/-reference-blue?logo=go&logoColor=white&style=flat" alt="Go Reference"></a>
+  <a href="https://goreportcard.com/report/github.com/officesdk/go-ai"><img src="https://img.shields.io/badge/go%20report-A+-brightgreen?style=flat" alt="Go Report"></a>
+  <a href="https://github.com/officesdk/go-ai/actions"><img src="https://img.shields.io/badge/Go%20Tests-passing-brightgreen?style=flat" alt="Go Tests"></a>
+</p>
 
 ## Usage
 ### Single AI ChatGPT example usage:
