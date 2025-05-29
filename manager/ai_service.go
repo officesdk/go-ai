@@ -12,5 +12,5 @@ type AIService interface {
 	Init(config config.Config) error
 	Name() string
 	ChatCompletion(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error)
-	ChatCompletionStream(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error)
+	ChatCompletionStream(ctx context.Context, request aimodel.ChatCompletionRequest) (response *aimodel.ChatCompletionStream, err error)
 }

@@ -1,6 +1,7 @@
 package openai
 
 import (
+	"bufio"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -16,11 +17,6 @@ import (
 type OpenAIService struct {
 	client *resty.Client
 	config config.Config
-}
-
-func (o *OpenAIService) ChatCompletionStream(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error) {
-	//TODO implement me
-	panic("implement me")
 }
 
 var Service = &OpenAIService{}
@@ -42,6 +38,7 @@ func (o *OpenAIService) Name() string {
 }
 
 func (o *OpenAIService) ChatCompletion(ctx context.Context, request aimodel.ChatCompletionRequest) (response aimodel.ChatCompletionResponse, err error) {
+	request.Stream = false
 	resp, err := o.client.R().SetContext(ctx).SetHeaders(map[string]string{
 		"Content-Type":  "application/json",
 		"Authorization": "Bearer " + o.config.ApiKey,
@@ -65,4 +62,36 @@ func (o *OpenAIService) ChatCompletion(ctx context.Context, request aimodel.Chat
 		return
 	}
 	return
+}
+
+// CreateChatCompletionStream — API call to create a chat completion w/ streaming
+// support. It sets whether to stream back partial progress. If set, tokens will be
+// sent as data-only server-sent events as they become available, with the
+// stream terminated by a data: [DONE] message.
+func (c *OpenAIService) ChatCompletionStream(
+	ctx context.Context,
+	request aimodel.ChatCompletionRequest,
+) (stream *aimodel.ChatCompletionStream, err error) {
+	request.Stream = true
+
+	resp, err := c.client.R().SetContext(ctx).SetDoNotParseResponse(true).SetHeaders(map[string]string{
+		"Content-Type":  "application/json",
+		"Authorization": "Bearer " + c.config.ApiKey,
+		"Cache-Control": "no-cache",
+		"Connection":    "keep-alive",
+		"Accept":        "text/event-stream",
+	}).SetBody(request).Post("/v1/chat/completions")
+	if err != nil {
+		if strings.Contains(err.Error(), "connection refused") {
+			return
+		}
+		return
+	}
+
+	streamReader := &aimodel.StreamReader{
+		Reader: bufio.NewReader(resp.RawResponse.Body),
+	}
+	return &aimodel.ChatCompletionStream{
+		StreamReader: streamReader,
+	}, nil
 }
