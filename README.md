@@ -5,6 +5,7 @@
   <a href="https://github.com/officesdk/go-ai/network/members"><img src="https://img.shields.io/github/forks/officesdk/go-ai?style=flat" alt="Forks"></a>
   <a href="https://github.com/officesdk/go-ai/issues"><img src="https://img.shields.io/github/issues/officesdk/go-ai?color=gold&style=flat" alt="Issues"></a>
   <a href="https://github.com/officesdk/go-ai/pulls"><img src="https://img.shields.io/github/issues-pr/officesdk/go-ai?color=gold&style=flat" alt="Pull Requests"></a>
+
   <a href="https://github.com/officesdk/go-ai/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="https://github.com/officesdk/go-ai/graphs/contributors"><img src="https://img.shields.io/github/contributors/officesdk/go-ai?color=green&style=flat" alt="Contributors"></a>
   <a href="https://github.com/officesdk/go-ai/commits"><img src="https://img.shields.io/github/last-commit/officesdk/go-ai?color=green&style=flat" alt="Last Commit"></a>
@@ -14,6 +15,9 @@
   <a href="https://goreportcard.com/report/github.com/officesdk/go-ai"><img src="https://img.shields.io/badge/go%20report-A+-brightgreen?style=flat" alt="Go Report"></a>
   <a href="https://github.com/officesdk/go-ai/actions"><img src="https://img.shields.io/badge/Go%20Tests-passing-brightgreen?style=flat" alt="Go Tests"></a>
 </p>
+
+[![codecov](https://codecov.io/gh/officesdk/go-ai/branch/master/graph/badge.svg)](https://codecov.io/gh/officesdk/go-ai)
+[![goproxy.cn](https://goproxy.cn/stats/github.com/officesdk/go-ai/badges/download-count.svg)](https://goproxy.cn/stats/github.com/officesdk/go-ai)
 
 ## Usage
 ### Single AI ChatGPT example usage:
